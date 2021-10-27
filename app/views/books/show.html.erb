@@ -1,0 +1,67 @@
+<div class="container">  <!-- この行を追加 -->
+  <div class="row">      <!-- この行を追加 -->
+
+
+    <div class="col-lg-4" >
+<div class="overflow-wrap">
+     <div class=break-word>
+<div class="left" >
+
+ <h1>User Info</h1>
+ <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <table class="table table-striped">
+  <tr>
+ <th>name</th>  <th><%= @user.name %></th></tr>
+   <tr>
+ <th>
+  <h5>introduction</h5></th><th><%= @user.introduction %></th></tr>
+
+     </table>
+<%= link_to edit_user_path(@user), class: "btn btn-danger" do%>
+<i class="fas fa-user-cog"></i>
+<% end %>
+<h1>New book</h1>
+
+<!-- form_with部分 -->
+<%= form_with model:@book, local:true do |f| %>
+
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+
+  <%= f.submit 'Creat Book', class: "btn btn-secondary" %>
+
+<% end %>
+</div>
+ </div>
+  </div>
+
+ </div>
+
+
+  <h1>Book detail</h1>
+   <% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+  <table><tr>
+ <th>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  </th>
+
+ <th><%=link_to @user.name,user_path %></th> <th><%= link_to @book.title,book_path(@book) %></th> <th><%=@book.body %></th>
+<th>   <span>
+  <%= link_to "Edit", edit_book_path(@book) %>
+  </span></th>
+ <th>  <span>
+  <%= link_to "Destroy", book_path(@book), method: :delete %>
+  </span></th>
+ </tr>
+
+   </table>
+   </div>  <!-- この行を追加 -->
+</div>    <!-- この行を追加 -->
