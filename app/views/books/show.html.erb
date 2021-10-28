@@ -1,8 +1,18 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
 <div class="container">  <!-- この行を追加 -->
   <div class="row">      <!-- この行を追加 -->
 
 
-    <div class="col-lg-4" >
+    <div class="col-lg-4 col-md-4" >
 <div class="overflow-wrap">
      <div class=break-word>
 <div class="left" >
@@ -17,9 +27,11 @@
   <h5>introduction</h5></th><th><%= @user.introduction %></th></tr>
 
      </table>
-<%= link_to edit_user_path(@user), class: "btn btn-danger" do%>
+<%= link_to edit_user_path(@user), class: "btn" do%>
 <i class="fas fa-user-cog"></i>
 <% end %>
+
+
 <h1>New book</h1>
 
 <!-- form_with部分 -->
@@ -31,7 +43,7 @@
   <h4>Opinion</h4>
   <%= f.text_area :body %>
 
-  <%= f.submit 'Creat Book', class: "btn btn-secondary" %>
+  <%= f.submit 'Create Book', class: "btn btn-secondary" %>
 
 <% end %>
 </div>
@@ -40,17 +52,15 @@
 
  </div>
 
+ <div class="col-lg-8 col-md-8">  <!-- この行を追加 -->
 
   <h1>Book detail</h1>
-   <% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
-  <% @book.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-<% end %>
+
+
   <table><tr>
- <th>
+ <th><%= link_to user_path do %>
       <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <% end %>
   </th>
 
  <th><%=link_to @user.name,user_path %></th> <th><%= link_to @book.title,book_path(@book) %></th> <th><%=@book.body %></th>
@@ -65,3 +75,4 @@
    </table>
    </div>  <!-- この行を追加 -->
 </div>    <!-- この行を追加 -->
+</div>

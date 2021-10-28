@@ -1,4 +1,14 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+  
 <h2>User info</h2>
+
 <%= form_with model:@user, local:true do |f| %>
   <label for="inputName">Name</label>
   <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
@@ -8,6 +18,6 @@
   <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
 
   <label for="inputName">Introduction</label>
-  <%= f.text_field :Introduction, autofocus: true, id:"Introduction", placeholder:"一言"%>
+  <%= f.text_field :introduction, autofocus: true, id:"Introduction", placeholder:"一言"%>
   <%= f.submit "Update User"%>
 <% end %>

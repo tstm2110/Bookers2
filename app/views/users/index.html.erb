@@ -1,9 +1,18 @@
+ <% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <% @use.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <!-- ここからサイドバー -->
 <div class="container">  <!-- この行を追加 -->
   <div class="row">      <!-- この行を追加 -->
 
 
-    <div class="col-lg-4" >
+    <div class="col-lg-4 col-md-4" >
 <div class="overflow-wrap">
      <div class=break-word>
 <div class="left" >
@@ -11,14 +20,13 @@
  <h1>User Info</h1>
  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
   <table class="table table-striped">
-  <tr>
- <th>name</th>  <th><%= @user.name %></th><th><%= @user.introduction %></th></tr>
+   <tr> <th>name</th>  <th><%= @user.name %></th></tr>
    <tr>
  <th>introduction</th><th><%= @user.introduction %></th>
  </tr>
 
      </table>
-<%= link_to edit_user_path(@user), class: "btn btn-danger" do%>
+<%= link_to edit_user_path(@user), class: "btn" do%>
 <i class="fas fa-user-cog"></i>
 <% end %>
 
@@ -33,7 +41,7 @@
   <h4>Opinion</h4>
   <%= f.text_area :body %>
 
-  <%= f.submit 'Creat Book', class: "btn btn-secondary" %>
+  <%= f.submit 'Create Book', class: "btn btn-secondary" %>
 
 <% end %>
 </div>
@@ -43,7 +51,7 @@
  </div>
 
 
- <div class="col-lg-8">  <!-- この行を追加 -->
+ <div class="col-lg-8 col-md-8">  <!-- この行を追加 -->
 <h1>Users</h1>
 <div class="overflow-wrap">
      <div class=break-word>
@@ -57,7 +65,7 @@
 <div>
 
   <tr><td>
-  <p> <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+  <p> <%= attachment_image_tag users, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
   </td>
   <td>
      <p><%= users.name %></p>
