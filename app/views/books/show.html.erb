@@ -1,5 +1,5 @@
 <% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
+  <%= @book.errors.count %>件のerrorsが発生しました
   <% @book.errors.full_messages.each do |message| %>
     <%= message %>
   <% end %>
@@ -12,7 +12,7 @@
   <div class="row">      <!-- この行を追加 -->
 
 
-    <div class="col-lg-4 col-md-4" >
+    <div class="col-lg-3 col-md-3" >
 <div class="overflow-wrap">
      <div class=break-word>
 <div class="left" >
@@ -35,7 +35,7 @@
 <h1>New book</h1>
 
 <!-- form_with部分 -->
-<%= form_with model:@book, local:true do |f| %>
+<%= form_with model:@bookkara, local:true do |f| %>
 
   <h4>Title</h4>
   <%= f.text_field :title %>
@@ -52,24 +52,28 @@
 
  </div>
 
- <div class="col-lg-8 col-md-8">  <!-- この行を追加 -->
+ <div class="col-lg-8 col-md-8 offset-md-1">  <!-- この行を追加 -->
 
   <h1>Book detail</h1>
 
 
   <table><tr>
- <th><%= link_to user_path do %>
+ <th><%= link_to user_path(@user) do %>
       <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
       <% end %>
   </th>
 
- <th><%=link_to @user.name,user_path %></th> <th><%= link_to @book.title,book_path(@book) %></th> <th><%=@book.body %></th>
+ <th><%=link_to @user.name,user_path(@user) %></th>
+ <th><%= link_to @book.title,book_path(@book) %></th>
+ <th><%=@book.body %></th>
+<% if @user == current_user%>
 <th>   <span>
   <%= link_to "Edit", edit_book_path(@book) %>
   </span></th>
  <th>  <span>
   <%= link_to "Destroy", book_path(@book), method: :delete %>
   </span></th>
+  <% end %>
  </tr>
 
    </table>
