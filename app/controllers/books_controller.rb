@@ -44,9 +44,10 @@ class BooksController < ApplicationController
   def show
     @bookkara=Book.new
     @book = Book.find(params[:id])
-
+    @books=@book.book_comments
     @users=User.all
     @user =@book.user
+    @book_comment = BookComment.new
   end
 
   def update

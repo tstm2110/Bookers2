@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
   attachment :image # ここを追加（_idは含めません）
    has_many :books, dependent: :destroy
-
+   has_many :book_comment, dependent: :destroy
+   has_many :favorites, dependent: :destroy
    validates :name, length: {maximum: 20}
     validates :name, length: {minimum: 2}
    validates :name, presence: true,uniqueness:true
