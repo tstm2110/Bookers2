@@ -10,9 +10,12 @@ class BooksController < ApplicationController
   flash[:notice] = "Book was successfully created."
     redirect_to book_path(@book.id)
   else
+
      @users=User.all
      @books=Book.all
      @user =current_user
+      @following_users = @user.following_user
+    @follower_users = @user.follower_user
     render :index
 
   end
@@ -32,6 +35,8 @@ class BooksController < ApplicationController
     @books=Book.all
     @users=User.all
     @user =current_user
+   @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def destroy
@@ -48,14 +53,20 @@ class BooksController < ApplicationController
     @users=User.all
     @user =@book.user
     @book_comment = BookComment.new
+     @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def update
+     @following_users = @user.following_user
+    @follower_users = @user.follower_user
+
     @book = Book.find(params[:id])
     if @book.update(book_params)
      flash[:notice] = "Book was successfully created."
     redirect_to book_path(@book.id)
     else
+
      @users=User.all
      @books=Book.all
      @user =current_user

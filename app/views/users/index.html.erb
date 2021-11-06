@@ -12,9 +12,14 @@
  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
   <table class="table table-striped">
    <tr> <th>name</th>  <th><%= @user.name %></th></tr>
-   <tr>
- <th>introduction</th><th><%= @user.introduction %></th>
- </tr>
+   <tr><th>introduction</th><th><%= @user.introduction %></th></tr>
+   <tr> <th> follows</tt><th>  <%= link_to follows_user_path(@user) do %>
+      <%= @following_users.count %><% end %> </th>
+  </tr>
+  <tr>
+    <th> followers </tt><th> <%= link_to followers_user_path(@user) do %>
+     <%= @follower_users.count %><% end %>  </th>
+    </tr>
 
      </table>
 <%= link_to edit_user_path(@user), class: "btn" do%>

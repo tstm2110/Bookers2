@@ -29,7 +29,13 @@
    <tr>
  <th>
   <h5>introduction</h5></th><th><%= @user.introduction %></th></tr>
-
+ <tr> <th> follows</tt><th>  <%= link_to follows_user_path(@user) do %>
+      <%= @following_users.count %><% end %> </th>
+  </tr>
+  <tr>
+    <th> followers </tt><th> <%= link_to followers_user_path(@user) do %>
+     <%= @follower_users.count %><% end %>  </th>
+    </tr>
      </table>
 <%= link_to edit_user_path(@user), class: "btn" do%>
 <i class="fas fa-user-cog"></i>

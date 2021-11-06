@@ -8,33 +8,37 @@ class UsersController < ApplicationController
     @user_images = @user.books
     @book=Book.new
 
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
   def index
     @book = Book.new
     @books=Book.all
     @users=User.all
     @user = current_user
+
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
   def edit
     @user = User.find(params[:id])
      unless @user.id == current_user.id
-
       redirect_to user_path(current_user)
      end
-
   end
+def follows
+  user = User.find(params[:id])
+  @users = user.following_user.page(params[:page]).per(3).reverse_order
 
-  # def ensure_current_user
-  # if current_user.id != params[:id].to_i
-  #   flash[:notice]="権限がありません"
-  #   redirect_to("/books/index")
-  # end
-  # end
-# def users
-# @users=User.all
-# @user = User.find(params[:id])
+end
 
-# end
+def followers
+  user = User.find(params[:id])
+  @users = user.follower_user.page(params[:page]).per(3).reverse_order
+
+    
+end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
