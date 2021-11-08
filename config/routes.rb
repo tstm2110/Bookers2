@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   get 'favorites/destroy'
   get 'book_comments/create'
   get 'book_comments/destroy'
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'home#top'
   resources :users, only: [:show, :edit, :update, :index ]
   resources :books
   get 'home/about' => 'home#about'
-
-
+  
+get '/search', to: 'searches#search'
 resources :book_comments
 
 

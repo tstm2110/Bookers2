@@ -74,7 +74,11 @@ class BooksController < ApplicationController
     #edit
     end
   end
-
+def search
+  @books = Book.search(params[:keyword])
+  @keyword = params[:keyword]
+  render:index
+end
    # 投稿データのストロングパラメータ
   private
 

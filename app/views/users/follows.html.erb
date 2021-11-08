@@ -1,24 +1,24 @@
-<p>Follow Users</p>
+<p
 <div class="cover-user-index">
   <div class="container">
  <div class="row justify-content-left">
-      <h1 class="font-weight-normal mt-5 mb-5">Followers Users</h1>
+      <h1 class="font-weight-normal mt-5 mb-5">Follow Users</h1>
     </div>
     <table>
       <tr><th>image </th><th> name</th><th><th></th></th></tr>
     <div class="row justify-content-center">
       <% @users.each do |user| %>
        <tr><td>
-      <div class="one-post card w-100">
+
         <%= link_to user_path(user) do %>
-        <p class="caption h4"></p>
-        <div class="d-flex">
-          <%= attachment_image_tag @user, :profile_image, size: '50x50', fallback: "no_image.jpg", class: "mb-3 mt-3 ml-3 profile-img" %>
+
+
+          <%= attachment_image_tag user, :profile_image, :fill ,60,60 ,fallback: "no_image.jpg", size: "60x60" %>
           <h4 class="ml-5"></h4>
-        </div>
+
         <p class="caption"></p>
         <% end %>
-      </div></td>  <td>
+      </td>  <td>
       <%= user.name %></td>
         <td>フォロー数:
        <%= user.following_user.count %></td>
