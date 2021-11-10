@@ -13,33 +13,20 @@
 
 <div class="container">  <!-- この行を追加 -->
   <div class="row">      <!-- この行を追加 -->
-
-
     <div class="col-lg-3 col-md-3" >
-
 <div class="overflow-wrap">
      <div class=break-word>
 <div class="left" >
-
  <h1>User Info</h1>
-
-
-
-
  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
   <table class="table table-striped">
   <tr>
  <th>name</th> <th><%= @user.name %></th></tr>
-   <tr>
- <th>
-  <h5>introduction</h5></th><th><%= @user.introduction %></th></tr>
+   <tr> <th><h5>introduction</h5></th><th><%= @user.introduction %></th></tr>
  <tr> <th> follows</tt><th>  <%= link_to follows_user_path(@user) do %>
-      <%= @following_users.count %><% end %> </th>
-  </tr>
-  <tr>
-    <th> followers </tt><th> <%= link_to followers_user_path(@user) do %>
-     <%= @follower_users.count %><% end %>  </th>
-    </tr>
+      <%= @following_users.count %><% end %> </th>  </tr>
+  <tr> <th> followers </tt><th> <%= link_to followers_user_path(@user) do %>
+     <%= @follower_users.count %><% end %>  </th></tr>
      </table>
 <%= link_to edit_user_path(@user), class: "btn" do%>
 <i class="fas fa-user-cog"></i>
@@ -49,73 +36,45 @@
 
 <!-- form_with部分 -->
 <%= form_with model:@book, local:true do |f| %>
-
   <h4>Title</h4>
   <%= f.text_field :title %>
-
   <h4>Opinion</h4>
   <%= f.text_area :body %>
-
   <%= f.submit 'Create Book', class: "btn btn-secondary" %>
-
 <% end %>
 </div>
  </div>
   </div>
-
  </div>
-
  <div class="col-lg-8 col-md-8 offset-md-1">  <!-- この行を追加 -->
 <h1>Books</h1>
 <div class="overflow-wrap">
      <div class=break-word>
 <div class="right" >
 <table>
-  <tr>
- <th>  </th> <th>Title</th>  <th>Opinion</th></tr> <th>  </th> <th>  </th>
+  <tr><th>  </th> <th>Title</th>  <th>Opinion</th></tr> <th>  </th> <th>  </th>
 <% @books.each do |book_image| %>
 <div>
   <tr><td>
   <p><%= link_to user_path(book_image.user) do %>
      <%= attachment_image_tag book_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-     <%end%></p>
-  </td>
-  <td>
+     <%end%></p></td><td>
     <span>
   <%= link_to book_image.title, book_path(book_image) %>
-  </span>
-  </td>
-  <td>
-  <p><%= book_image.body %></p>
-  </td>
-  <td>
- <% if book_image.favorited_by?(current_user) %>
-    <p>
-      <%= link_to book_favorites_path(book_image.id), method: :delete do %>
-        ♥<%= book_image.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to book_favorites_path(book_image.id), method: :post do %>
-        ♡<%= book_image.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-  </td>
+  </span> </td><td>
+  <p><%= book_image.body %></p> </td>
+<td class="favorite-btn">
+  <%= render 'favorites/favorite-btn',book_image: book_image %>
+</td>
+
   <td>
 <p>コメント数：<%= book_image.book_comments.count %></p>
-  </td>
-  </tr>
-
-</div>
+  </td>  </tr></div>
 <% end %>
  </table>
  </div>
  </div>
   </div>
     </div>  <!-- この行を追加 -->
-
-
      </div>  <!-- この行を追加 -->
 </div>    <!-- この行を追加 -->
